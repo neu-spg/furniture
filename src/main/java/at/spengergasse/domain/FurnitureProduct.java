@@ -32,7 +32,7 @@ public class FurnitureProduct {
     public FurnitureProduct() {
         setFurnitureId();
         setProductionDate(LocalDate.now());
-        setProductName("Uknk");
+        setProductName("Unkn");
         setMaterial("normal");
         setPrice(10.0);
         setQuantity(5);
