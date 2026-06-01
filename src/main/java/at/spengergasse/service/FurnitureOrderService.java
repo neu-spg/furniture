@@ -13,6 +13,7 @@ public class FurnitureOrderService {
 
     public FurnitureOrderService() {
         furnitureProducts = new ArrayList<>(1000);
+        fillTestData();
     }
 
     public void fillTestData() {
@@ -48,6 +49,12 @@ public class FurnitureOrderService {
         furnitureProducts.add(new FurnitureProduct(LocalDate.of(2024,3,20), "Kids Desk", "Wood", 48.0, 8, false));
         furnitureProducts.add(new FurnitureProduct(LocalDate.of(2024,3,22), "Rocking Chair", "Wood", 90.0, 3, false));
         furnitureProducts.add(new FurnitureProduct(LocalDate.of(2024,3,25), "Executive Desk", "Customized", 140.0, 1, true));
+    }
+
+    public ArrayList<FurnitureProduct> findAll() {
+        ArrayList<FurnitureProduct> clone;
+        clone = new ArrayList<>(furnitureProducts);
+        return clone;
     }
 
     @Override

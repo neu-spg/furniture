@@ -30,13 +30,6 @@ public class FurnitureProduct {
 
 
     public FurnitureProduct() {
-        setFurnitureId();
-        setProductionDate(LocalDate.now());
-        setProductName("Unkn");
-        setMaterial("normal");
-        setPrice(10.0);
-        setQuantity(5);
-        setAssemblyService(false);
     }
 
     public FurnitureProduct(LocalDate productionDate, String productName, String material, Double price, Integer quantity, Boolean assemblyService) {
