@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.stream.Collectors;
 
 @Service
@@ -65,6 +66,42 @@ public class FurnitureOrderService {
             erg += fp.toString() + "\n";
         }
         return erg;
+    }
+
+    public void removeAllOrders() {
+        furnitureProducts.clear();
+    }
+
+    public void add10Orders() {
+        furnitureProducts.add(new FurnitureProduct(LocalDate.of(2024,1,10), "Chair Basic", "Wood", 25.0, 10, false));
+        furnitureProducts.add(new FurnitureProduct(LocalDate.of(2024,1,12), "Chair Deluxe", "Wood", 45.0, 5, true));
+        furnitureProducts.add(new FurnitureProduct(LocalDate.of(2024,1,15), "Office Desk", "Metal", 120.0, 3, true));
+        furnitureProducts.add(new FurnitureProduct(LocalDate.of(2024,1,18), "Coffee Table", "Wood", 55.0, 8, false));
+        furnitureProducts.add(new FurnitureProduct(LocalDate.of(2024,1,20), "Bookshelf", "Wood", 80.0, 4, true));
+        furnitureProducts.add(new FurnitureProduct(LocalDate.of(2024,1,22), "TV Stand", "Metal", 95.0, 6, false));
+        furnitureProducts.add(new FurnitureProduct(LocalDate.of(2024,1,25), "Dining Table", "Wood", 130.0, 2, true));
+        furnitureProducts.add(new FurnitureProduct(LocalDate.of(2024,1,28), "Nightstand", "Wood", 35.0, 12, false));
+        furnitureProducts.add(new FurnitureProduct(LocalDate.of(2024,2,1), "Wardrobe", "Customized", 140.0, 1, true));
+        furnitureProducts.add(new FurnitureProduct(LocalDate.of(2024,2,3), "Shoe Rack", "Plastic", 20.0, 15, false));
+    }
+
+    public void add1Euro() {
+        for (FurnitureProduct fp : furnitureProducts) {
+            fp.setPrice(fp.getPrice() + 1);
+        }
+    }
+
+    public void removeAllAssemblyServices() {
+        Iterator<FurnitureProduct> it;
+        FurnitureProduct fp;
+
+        it = furnitureProducts.iterator();
+        while (it.hasNext()) {
+            fp = it.next();
+            if (fp.getAssemblyService() == true) {
+                it.remove();
+            }
+        }
     }
 
 /*
