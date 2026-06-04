@@ -104,6 +104,11 @@ public class FurnitureOrderService {
         }
     }
 
+    public void addWrongFurnitureProduct() {
+        furnitureProducts.add(new FurnitureProduct(LocalDate.of(2024,1,10), "Chair Basic", "Wood", -5.0, 10, false));
+
+    }
+
 /*
     public String toString2() {
         return furnitureProducts.stream()
