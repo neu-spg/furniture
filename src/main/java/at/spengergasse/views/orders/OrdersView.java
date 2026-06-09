@@ -86,13 +86,46 @@ public class OrdersView extends VerticalLayout {
                 })
             .setHeader("Assembly Service")
             .setSortable(true);
-
-
-
-
         add(grid);
         reload();
 
+        grid.addComponentColumn(furnitureProduct -> {
+                    Button delete = new Button("Delete");
+                    delete.addClickListener(e -> remove1Order(furnitureProduct.getFurnitureId()));
+                    return delete;
+                })
+                .setHeader("Action")
+                .setSortable(false);
+
+        grid.addComponentColumn(furnitureProduct -> {
+            Button add1Quantity = new Button("Add 1 Product");
+            add1Quantity.addClickListener(e-> add1Quantity(furnitureProduct.getFurnitureId()));
+            return add1Quantity;
+        })
+                .setHeader("Action")
+                .setSortable(false);
+        add(grid);
+        reload();
+    }
+
+    private void add1Quantity(Long furnitureId) {
+        try {
+            furnitureOrderService.add1Quantity(furnitureId);
+            reload();
+        } catch (FurnitureProductException e) {
+            Notification.show(e.getMessage());
+        }
+    }
+
+    private void remove1Order(Long furnitureId) {
+        try {
+            furnitureOrderService.remove1Order(furnitureId);
+            reload();
+        }
+        catch (FurnitureProductException e) {
+            Notification.show(e.getMessage());
+            reload();
+        }
     }
 
     private void addWrongFurnitureProduct() {

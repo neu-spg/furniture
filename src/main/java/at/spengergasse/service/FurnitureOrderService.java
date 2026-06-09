@@ -1,6 +1,7 @@
 package at.spengergasse.service;
 
 import at.spengergasse.domain.FurnitureProduct;
+import at.spengergasse.domain.FurnitureProductException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -16,6 +17,7 @@ public class FurnitureOrderService {
         furnitureProducts = new ArrayList<>(1000);
         fillTestData();
     }
+
 
     public void fillTestData() {
         furnitureProducts.add(new FurnitureProduct(LocalDate.of(2024,1,10), "Chair Basic", "Wood", 25.0, 10, false));
@@ -106,9 +108,35 @@ public class FurnitureOrderService {
 
     public void addWrongFurnitureProduct() {
         furnitureProducts.add(new FurnitureProduct(LocalDate.of(2024,1,10), "Chair Basic", "Wood", -5.0, 10, false));
-
     }
 
+    public void remove1Order(Long furnitureId) {
+        /*FurnitureProduct products;
+
+        for (FurnitureProduct p: furnitureProducts) {
+            if (p.getFurnitureId().equals(furnitureId))
+                products = p;
+        }
+        furnitureProducts.remove(products);
+    */
+        if (furnitureId == null)
+            throw new FurnitureProductException("Furniture ID does not exist!");
+
+        if (furnitureProducts.removeIf(p->p.getFurnitureId().equals(furnitureId)) == false)
+            throw new FurnitureProductException("Furniture ID does not exist!");
+    }
+
+    public void add1Quantity(Long furnitureId) {
+        if (furnitureId == null)
+            throw new FurnitureProductException("Furniture ID does not exist!");
+
+        for (FurnitureProduct p : furnitureProducts) {
+            if (p.getFurnitureId().equals(furnitureId))
+                p.setQuantity(p.getQuantity() + 1);
+
+        }
+    }
+}
 /*
     public String toString2() {
         return furnitureProducts.stream()
@@ -117,4 +145,4 @@ public class FurnitureOrderService {
     }
 
  */
-}
+
